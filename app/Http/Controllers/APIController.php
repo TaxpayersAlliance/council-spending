@@ -26,33 +26,48 @@ class APIController extends Controller
 {
     protected $councilArt;
     protected $councilAssets;
-    protected $councilCompensationClaims;
-    protected $councilLiabilities;
-    protected $councillorsAllowances;
-    protected $councilTaxHistory;
-    protected $publicSectorRichList;
     protected $townHallRichList;
     protected $tradeUnionFunding;
+    protected $councilTaxHistory;
+    protected $councilLiabilities;
+    protected $publicSectorRichList;
+    protected $councillorsAllowances;
     protected $tradeUnionOfficeSpace;
+    protected $councilCompensationClaims;
 
+    /**
+     * injects the various report models as dependencies 
+     * 
+     * @param CouncilArt                $councilArt                [description]
+     * @param CouncilAssets             $councilAssets             [description]
+     * @param CouncilCompensationClaims $councilCompensationClaims [description]
+     * @param CouncilLiabilities        $councilLiabilities        [description]
+     * @param CouncillorsAllowances     $councillorsAllowances     [description]
+     * @param CouncilTaxHistory         $councilTaxHistory         [description]
+     * @param PublicSectorRichList      $publicSectorRichList      [description]
+     * @param TownHallRichList          $townHallRichList          [description]
+     * @param TradeUnionFunding         $tradeUnionFunding         [description]
+     * @param TradeUnionOfficeSpace     $tradeUnionOfficeSpace     [description]
+     */
     public function __construct(CouncilArt $councilArt, CouncilAssets $councilAssets, CouncilCompensationClaims $councilCompensationClaims, CouncilLiabilities $councilLiabilities, CouncillorsAllowances $councillorsAllowances, CouncilTaxHistory $councilTaxHistory, PublicSectorRichList $publicSectorRichList, TownHallRichList $townHallRichList, TradeUnionFunding $tradeUnionFunding, TradeUnionOfficeSpace $tradeUnionOfficeSpace)
     {
         $this->councilArt = $councilArt;
         $this->councilAssets = $councilAssets;
-        $this->councilCompensationClaims = $councilCompensationClaims;
-        $this->councilLiabilities = $councilLiabilities;
-        $this->councillorsAllowances = $councillorsAllowances;
-        $this->councilTaxHistory = $councilTaxHistory;
-        $this->publicSectorRichList = $publicSectorRichList;
         $this->townHallRichList = $townHallRichList;
         $this->tradeUnionFunding = $tradeUnionFunding;
+        $this->councilTaxHistory = $councilTaxHistory;
+        $this->councilLiabilities = $councilLiabilities;
+        $this->publicSectorRichList = $publicSectorRichList;
         $this->tradeUnionOfficeSpace = $tradeUnionOfficeSpace;
+        $this->councillorsAllowances = $councillorsAllowances;
+        $this->councilCompensationClaims = $councilCompensationClaims;
 
-        
     }
 
     /**
      * Get all stories from a given postcode
+     *
+     * entry point from routes - this is the 'main' function
      * 
      * @param  [type] $postcode  [description]
      * @param  [type] $verbosity [description]
@@ -105,7 +120,6 @@ class APIController extends Controller
             }
     	}
     	return $councils;
-
     }
     /**
      * Gets stories for each council
@@ -120,18 +134,37 @@ class APIController extends Controller
         $stories = [
             $this->councilArt->getStoryDataFromCouncil($councils, $type), 
             $this->councilAssets->getStoryDataFromCouncil($councils, $type), 
-            $this->councilCompensationClaims->getStoryDataFromCouncil($councils, $type), 
-            $this->councilLiabilities->getStoryDataFromCouncil($councils, $type),
-            $this->councillorsAllowances->getStoryDataFromCouncil($councils, $type),
-            $this->councilTaxHistory->getStoryDataFromCouncil($councils, $type), 
-            $this->publicSectorRichList->getStoryDataFromCouncil($councils, $type), 
-            $this->townHallRichList->getStoryDataFromCouncil($councils, $type), 
+            $this->townHallRichList->getStoryDataFromCouncil($councils, $type),
+            $this->councilTaxHistory->getStoryDataFromCouncil($councils, $type),  
             $this->tradeUnionFunding->getStoryDataFromCouncil($councils, $type),
-            $this->tradeUnionOfficeSpace->getStoryDataFromCouncil($councils, $type)       
+            $this->councilLiabilities->getStoryDataFromCouncil($councils, $type),
+            $this->publicSectorRichList->getStoryDataFromCouncil($councils, $type), 
+            $this->tradeUnionOfficeSpace->getStoryDataFromCouncil($councils, $type), 
+            $this->councillorsAllowances->getStoryDataFromCouncil($councils, $type),  
+            $this->councilCompensationClaims->getStoryDataFromCouncil($councils, $type)
+
         ];
-        
-        return $this->sortByPublicationDate($stories);
-        //return $stories;
+        $this->sortByPublicationDate($stories);
+
+        if ($verbosity == "true")
+        {
+            return $this->formatVerboseOutput($stories);
+        }
+        return $stories;
+    }
+    /**
+     * Unset unnecessary data from the array in the verbose output
+     * @param  [type] $stories [description]
+     * @return [type]          [description]
+     */
+    private function formatVerboseOutput($stories)
+    {
+        foreach ($stories as $key => $story) 
+        {
+            $story = array_reverse(array_slice(array_reverse($story->toArray()),0,4));
+            $stories[$key] = $story;
+        }
+        return $stories;
     }
     /**
      * sorts all reports by publication date
@@ -164,32 +197,16 @@ class APIController extends Controller
         $councils[$type]['data'] = $stories;
         return $councils[$type];
     }
-
+    /**
+     * flattens the array heirachy slightly to make it easier to manage
+     * 
+     * @param  [type] $councils [description]
+     * @param  [type] $type     [description]
+     * @return [type]           [description]
+     */
     private function arrayFormat ($councils, $type)
     {
-    	
-    	// $councils[$type] = Council::where("council_code",$councils[$type])->get();
     	$councils[$type] = $councils[$type][0];
     	return $councils;
     }
 }
-
-// [
-
-//     {
-//         "postcode": "DA110SA",
-//         "positional_quality_indicator": ​10,
-//         "eastings": ​564562,
-//         "northings": ​173944,
-//         "country_lookup_id": "E92000001",
-//         "NHS_regional_HA_code": "E19000002",
-//         "nhs_lookup_id": "E18000008",
-//         "county_lookup_id": "E10000016",
-//         "district_lookup_id": "E07000109",
-//         "ward_lookup_id": "E05004974",
-//         "id": ​1314368,
-//         "created_at": "2016-02-22 16:57:42",
-//         "updated_at": "2016-02-22 16:58:31"
-//     }
-
-// ]

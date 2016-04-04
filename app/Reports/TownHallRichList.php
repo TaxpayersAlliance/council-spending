@@ -8,23 +8,35 @@ use Illuminate\Database\Eloquent\Model;
 
 class TownHallRichList extends Report
 {
-    public function scopeRequired ($query, $councilCode)
-    {
-        $query->where('council_code', $councilCode)
-                                ->get(array(
-                                    'employees100',
-                                    'employees150'
-                                ));
-    }
+    /**
+     * get a formatted name for the model
+     * @return [type] [description]
+     */
     public function getName()
     {
     	return "Town Hall Rich List";
     }
-    
+    /**
+     * Concatenates a string for the liabilities content
+     * @param [type] $councils [description]
+     * @param [type] $type     [description]
+     * @param [type] $data     [description]
+     */
     public function setContent($councils, $type, $data)
     {
-        $concatenatedString = "In the 2014 Town Hall Rich List, ". $councils[$type]['council'] . " had " . $data['employees100'] . " employees earning more than £100,000 and " . $data['employees150'] . " employees earning more than £150,000";
+        $concatenatedString = "In the 2014 Town Hall Rich List, " . $councils[$type]['council'] . " had " . 
+            $this->setIndividualTHRLString($data['employees100'], "£100,000") . " and " . 
+            $this->setIndividualTHRLString($data['employees150'], "£150,000");
         
         return $concatenatedString;
+    }
+    /**
+     * sets each individual element of the THRL string
+     * @param [type] $value       [description]
+     * @param [type] $stringValue [description]
+     */
+    private function setIndividualTHRLString($value, $stringValue)
+    {
+        return $value . $this->returnSingularOrPluralString($value, " employee", " employees") . " on more than ". $stringValue;
     }
 }

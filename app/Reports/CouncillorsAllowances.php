@@ -18,49 +18,63 @@ class CouncillorsAllowances extends Report
     
     public function setContent($councils, $type, $data)
     {
-        $concatenatedString = "In 2014-15, " .  $councils[$type]['council'] . " " . 
+        $concatenatedString = $councils[$type]['council'] . " " . 
             $this->basicAllowanceString($data['basic_allowance']) . 
             $this->SRAString($data['special_responsibility_allowance']) . 
             $this->totalAllowanceString($data['total_allowances_cost']) . 
-            $this->totalAllowanceAndExpenceString($data['total_allowances_and_expenses_cost']); 
+            $this->totalAllowanceAndExpenceString($data['total_allowances_and_expenses_cost']) . " for 2014-15."; 
         
         return $concatenatedString;
     }
+    /**
+     * set basic allowance portion of content string
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
     private function basicAllowanceString($value)
     {
         if ($value != "no data")
         {
             return "paid a £" . number_format($value) . " basic allowance to all councillors. ";
         }
-        return "some other string";
+        return "was not able to provide information on the basic allowance paid to councilliors. ";
     }
+    /**
+     * set SRA part of content string
+     * @param [type] $value [description]
+     */
     private function SRAString($value)
     {
         if ($value != "no data")
         {
             return "The council leader received an additional £" . number_format($value) . ". ";
         }
-        return "some other string";
+        return "No information on the additional allowance paid to the council leader was available. ";
     }
+    /**
+     * set total allowance cost part of content string
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
     private function totalAllowanceString($value)
     {
         if ($value != "no data")
         {
             return "The total cost of paying the allowances was £" . number_format($value) . ", ";
         }
-        return "some other string";
+        return "The total cost of allowances is not known, ";
     }
+    /**
+     * set total allowances and expenses part of content string
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
     private function totalAllowanceAndExpenceString($value)
     {
         if ($value != "no data")
         {
-            return " including expenses, the total cost of paying councillors was £" . number_format($value) . ".";
+            return "including expenses, the total cost of paying councillors was £" . number_format($value);
         }
-        return "some other string";
+        return "total costs including expenses is not known";
     }
 }
-
-// basic_allowance": "12,805",
-// "special_responsibility_allowance": "42,109",
-// "total_allowances_cost": "1,633,832",
-// "total_allowances_and_expenses_cost": "1,747,927",
