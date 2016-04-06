@@ -1905,16 +1905,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "8da9523f07c62d56fe1cf36f8ae29b333afc181f"
+                "reference": "afab26b3c642beaa55b20de3d1f7852bd50f50f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/8da9523f07c62d56fe1cf36f8ae29b333afc181f",
-                "reference": "8da9523f07c62d56fe1cf36f8ae29b333afc181f",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/afab26b3c642beaa55b20de3d1f7852bd50f50f3",
+                "reference": "afab26b3c642beaa55b20de3d1f7852bd50f50f3",
                 "shasum": ""
             },
             "require": {
@@ -1961,7 +1961,7 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2016-03-13 10:22:39"
+            "time": "2016-04-05 18:46:47"
         },
         {
             "name": "fzaninotto/faker",

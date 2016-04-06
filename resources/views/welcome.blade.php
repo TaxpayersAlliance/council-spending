@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>Taxpayers' Data</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -38,7 +38,9 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <h1>Welcome to Taxpayers' data</h1>
+                <h4>The home of open API's from the TaxPayers' Alliance</h4>
+                <p>All source code for these projects is available on <a href="https://github.com/TaxpayersAlliance">GitHub</a></p>
             </div>
         </div>
     </body>
