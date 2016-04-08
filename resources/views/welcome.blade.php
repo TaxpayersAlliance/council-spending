@@ -76,7 +76,7 @@
       </div>
       <p>All source code for these projects is available on <a href="https://github.com/TaxpayersAlliance">GitHub</a></p>
       <div class="disclaimer">
-        <a href="http://www.taxpayersalliance.com" target="_blank"><img src="../../public/images/TPA-Logo-White.png" alt="TaxPayers' Alliance white logo" /></a>
+        <a href="http://www.taxpayersalliance.com" target="_blank"><img src="TPA-Logo-White.png" alt="TaxPayers' Alliance white logo" /></a>
         <p> TaxPayers' Alliance is a trading name of The TaxPayers' Alliance Limited, a company incorporated in England & Wales under company registration no. 04873888 and whose registered office is at 55 Tufton Street, London SW1P 3QL</p>
       </div>
     </div>
