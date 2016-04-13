@@ -23,15 +23,15 @@ class CouncilArt extends Report
      * @param  [type] $councilArtData [description]
      * @return [type]                 [description]
      */
-    public function setContent($councils, $type, $data)
+    public function setContent($council, $data)
     {
         $strTotalNumber = $this->totalNumberString($data['total_number']);
 
         $strOnDisplay = $this->totalOnDisplayString($data['total_on_display']);
         
-        $strValue = $this->totalValueString($data['total_number']);
+        $strValue = $this->totalValueString($data['value']);
 
-        $concatenatedString = $councils[$type]['council'] . $strTotalNumber . $strOnDisplay . $strValue;
+        $concatenatedString = $council['council'] . $strTotalNumber . $strOnDisplay . $strValue;
 
         return $concatenatedString;
     }

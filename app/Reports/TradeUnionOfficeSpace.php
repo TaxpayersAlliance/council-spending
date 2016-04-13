@@ -22,9 +22,9 @@ class TradeUnionOfficeSpace extends Report
      * @param [type] $type     [description]
      * @param [type] $data     [description]
      */
-    public function setContent($councils, $type, $data)
+    public function setContent($council, $data)
     {
-        $concatenatedString = "The Trade Union Office Space paper found that " . $councils[$type]['council'] . $this->floorSpaceString($data['floor_space']) . $this->valuationString($data['valuation']);
+        $concatenatedString = "The Trade Union Office Space paper found that " . $council['council'] . $this->floorSpaceString($data['floor_space']) . $this->valuationString($data['valuation']);
         
         return $concatenatedString;
     }

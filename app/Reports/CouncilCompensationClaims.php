@@ -22,10 +22,10 @@ class CouncilCompensationClaims extends Report
      * @param [type] $type     [description]
      * @param [type] $data     [description]
      */
-    public function setContent($councils, $type, $data)
+    public function setContent($council, $data)
     {
 
-        $concatenatedString = $councils[$type]['council'] . $this->totalCost($data['total']);
+        $concatenatedString = $council['council'] . $this->totalCost($data['total']);
         
         return $concatenatedString;
     }

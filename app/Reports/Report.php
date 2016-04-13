@@ -24,7 +24,7 @@ abstract class Report extends Model
      * @param [type] $type     [description]
      * @param [type] $data     [description]
      */
-    protected abstract function setContent($councils, $type, $data);
+    protected abstract function setContent($council, $data);
     /**
      * forces all child models to implement a function to get a formatted name for the model
      * @return [type] [description]
@@ -89,9 +89,9 @@ abstract class Report extends Model
      * @param  [type] $type     [description]
      * @return [type]           [description]
      */
-    private function getCouncilCode($councils, $type)
+    private function getCouncilCode($council)
     {
-        $councilCode = $councils[$type]['council_code'];
+        $councilCode = $council['council_code'];
 
         return $councilCode;
     }
@@ -117,18 +117,18 @@ abstract class Report extends Model
      * @param  [type] $type     [description]
      * @return [type]           [description]
      */
-    public function getStoryDataFromCouncil($councils, $type)
+    public function getStoryDataFromCouncil($council)
     {
-        $councilCode = $this->getCouncilCode($councils, $type);
+        $councilCode = $this->getCouncilCode($council);
 
         $data = $this->getDataFromCouncilCode($councilCode);
 
         $data = $this->tidyArray($data[0]);
 
         $data = $this->appendReportData($data, $this->getReportDetails($this->getName()));
-
-        $data['content'] = $this->setContent($councils, $type, $data);
-
+        
+        $data['content'] = $this->setContent($council, $data);
+        
         return $data;
     }
     /**

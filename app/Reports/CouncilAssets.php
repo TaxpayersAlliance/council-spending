@@ -21,9 +21,9 @@ class CouncilAssets extends Report
      * @param [type] $type     [description]
      * @param [type] $data     [description]
      */
-    public function setContent($councils, $type, $data)
+    public function setContent($council, $data)
     {
-        $concatenatedString = $councils[$type]['council'] . " owned: " . 
+        $concatenatedString = $council['council'] . " owned: " . 
 
         $this->setIndividualAssetStrings($data['golf_courses'], " golf course, ", " golf courses, ") . 
 
