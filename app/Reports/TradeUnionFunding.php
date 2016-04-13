@@ -24,7 +24,7 @@ class TradeUnionFunding extends Report
      */
     public function setContent($council, $data)
     {
-        $concatenatedString = "In 2012-13 " . $council . $this->unionFundingString($data['union_funding']) . $this->unionFTEString($data['staff_fte']);
+        $concatenatedString = "In 2012-13 " . $council['council'] . $this->unionFundingString($data['union_funding']) . $this->unionFTEString($data['staff_fte']);
         
         return $concatenatedString;
     }
