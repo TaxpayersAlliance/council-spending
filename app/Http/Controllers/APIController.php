@@ -75,7 +75,7 @@ class APIController extends Controller
      */
     public function getStories($postcode, $verbosity)
     {
-        $data = $this->getCouncilCodesFromPostcode($postcode);
+        $this->validatePostcode($postcode);
 
         $results = $this->getDataFromCouncilLookupCode($data, $verbosity);
 
