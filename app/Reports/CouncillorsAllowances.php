@@ -16,9 +16,9 @@ class CouncillorsAllowances extends Report
     	return "Councillors Allowances";
     }
     
-    public function setContent($councils, $type, $data)
+    public function setContent($council, $data)
     {
-        $concatenatedString = $councils[$type]['council'] . " " . 
+        $concatenatedString = $council['council'] . " " . 
             $this->basicAllowanceString($data['basic_allowance']) . 
             $this->SRAString($data['special_responsibility_allowance']) . 
             $this->totalAllowanceString($data['total_allowances_cost']) . 

@@ -75,11 +75,28 @@ class APIController extends Controller
      */
     public function getStories($postcode, $verbosity)
     {
-        $data = $this->getCouncilCodesFromPostcode($postcode);
+        $this->validatePostcode($postcode);
 
-        $results = $this->getDataFromCouncilLookupCode($data, $verbosity);
+        $councilData = $this->getCouncilCodesFromPostcode($postcode);
+
+        $results = $this->getDataFromCouncilLookupCode($councilData, $verbosity);
 
         return $results;
+    }
+    /**
+     * returns an error if anything but a valid postcode is submitted
+     * 
+     * @param  [type] $postcode [description]
+     * @return [type]           [description]
+     */
+    private function validatePostcode($postcode)
+    {
+        $length = strlen($postcode);
+
+        if(($length < 5) || ($length > 10))
+        {
+            dd("error, not a valid postcode");
+        }
     }
     /**
      * Returns a complete list of lookup codes for a given postcode
@@ -89,37 +106,56 @@ class APIController extends Controller
      */
     private function getCouncilCodesFromPostcode($postcode)
     {
-    	$data = Postcodes::where('postcode', $postcode)->first();
+    	$councilData = Postcodes::where('postcode', $postcode)->first();
     	
-    	return $data;
+    	return $councilData;
 
     }
     /**
      * Gets data relating to each council from the array of lookup codes
      * 
-     * @param  [type] $data      [description]
+     * @param  [type] $councilData      [description]
      * @param  [type] $verbosity [description]
      * @return [type]            [description]
      */
-    private function getDataFromCouncilLookupCode($data, $verbosity)
+    private function getDataFromCouncilLookupCode($councilData, $verbosity)
     {
     	$councilTypes = ['county', 'district'];
 
-    	foreach ($councilTypes as $type) {
-            $lookup_id = $type . '_lookup_id';
-            $councils[$type] = $data[$lookup_id];
-            if ($councils[$type] != null)
-            {
-                $councils[$type] = Council::where("council_code",$councils[$type])->get();
-        		
-        		$councils = $this->arrayFormat($councils, $type);
+        $councils = [
+            $this->getDataForEachCouncil($councilData, $verbosity, 'district'),
+            $this->getDataForEachCouncil($councilData, $verbosity, 'county')
+        ];
 
-                $stories = $this->getStoriesFromCouncils($councils, $type, $verbosity);
+    	// foreach ($councilTypes as $council => $type) {
 
-                $this->appendStoriesToCouncils($stories, $councils, $type);
-            }
-    	}
+     //        $councils['council'] = $this->getDataForEachCouncil($councilData, $verbosity, $type);
+     //    }
+
     	return $councils;
+    }
+    private function getDataForEachCouncil($councilData, $verbosity, $type)
+    {
+    $lookup_id = $type . '_lookup_id';
+
+        $councils['council'][$type] = $councilData[$lookup_id];
+
+        if ($councils['council'] != null)
+        {
+            $councils['council'] = Council::where("council_code",$councils['council'])->get();
+
+            $council = $councils['council'];
+
+            $council = $this->arrayFormat($council);
+
+            $council['type'] = $type;
+
+            $stories = $this->getStoriesFromCouncil($council, $verbosity);      
+
+            $council = $this->appendStoriesToCouncil($stories, $council);
+
+            return $council;
+        }
     }
     /**
      * Gets stories for each council
@@ -129,19 +165,19 @@ class APIController extends Controller
      * @param  [type] $verbosity [description]
      * @return [type]            [description]
      */
-    private function getStoriesFromCouncils ($councils, $type, $verbosity)
+    private function getStoriesFromCouncil ($council, $verbosity)
     {
         $stories = [
-            $this->councilArt->getStoryDataFromCouncil($councils, $type), 
-            $this->councilAssets->getStoryDataFromCouncil($councils, $type), 
-            $this->townHallRichList->getStoryDataFromCouncil($councils, $type),
-            $this->councilTaxHistory->getStoryDataFromCouncil($councils, $type),  
-            $this->tradeUnionFunding->getStoryDataFromCouncil($councils, $type),
-            $this->councilLiabilities->getStoryDataFromCouncil($councils, $type),
-            $this->publicSectorRichList->getStoryDataFromCouncil($councils, $type), 
-            $this->tradeUnionOfficeSpace->getStoryDataFromCouncil($councils, $type), 
-            $this->councillorsAllowances->getStoryDataFromCouncil($councils, $type),  
-            $this->councilCompensationClaims->getStoryDataFromCouncil($councils, $type)
+            $this->councilArt->getStoryDataFromCouncil($council), 
+            $this->councilAssets->getStoryDataFromCouncil($council), 
+            $this->townHallRichList->getStoryDataFromCouncil($council),
+            $this->councilTaxHistory->getStoryDataFromCouncil($council),  
+            $this->tradeUnionFunding->getStoryDataFromCouncil($council),
+            $this->councilLiabilities->getStoryDataFromCouncil($council),
+            $this->publicSectorRichList->getStoryDataFromCouncil($council), 
+            $this->tradeUnionOfficeSpace->getStoryDataFromCouncil($council), 
+            $this->councillorsAllowances->getStoryDataFromCouncil($council),  
+            $this->councilCompensationClaims->getStoryDataFromCouncil($council)
 
         ];
         $this->sortByPublicationDate($stories);
@@ -191,11 +227,12 @@ class APIController extends Controller
      * @param  [type] $type     [description]
      * @return [type]           [description]
      */
-    private function appendStoriesToCouncils($stories, $councils, $type)
+    private function appendStoriesToCouncil($stories, $council)
     {
 
-        $councils[$type]['data'] = $stories;
-        return $councils[$type];
+        $council['data'] = $stories;
+
+        return $council;
     }
     /**
      * flattens the array heirachy slightly to make it easier to manage
@@ -204,9 +241,23 @@ class APIController extends Controller
      * @param  [type] $type     [description]
      * @return [type]           [description]
      */
-    private function arrayFormat ($councils, $type)
+    private function arrayFormat ($council)
     {
-    	$councils[$type] = $councils[$type][0];
-    	return $councils;
+    	$council = $council[0];
+    	return $council;
+    }
+    /**
+     * renames a key in an array
+     * @param  [type] $array  [description]
+     * @param  [type] $newKey [description]
+     * @param  [type] $oldKey [description]
+     * @return [type]         [description]
+     */
+    private function renameKey ($array, $newKey, $oldKey)
+    {
+        $array[$newKey] = $array[$oldKey];
+        unset($array[$oldKey]);
+
+        return $array;
     }
 }

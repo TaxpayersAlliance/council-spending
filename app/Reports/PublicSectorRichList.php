@@ -22,9 +22,9 @@ class PublicSectorRichList extends Report
      * @param [type] $type     [description]
      * @param [type] $data     [description]
      */
-    public function setContent($councils, $type, $data)
+    public function setContent($council, $data)
     {
-        $concatenatedString = "In the 2015 Public Sector Rich List, ". $councils[$type]['council'] . " had " . 
+        $concatenatedString = "In the 2015 Public Sector Rich List, ". $council['council'] . " had " . 
             $this->setIndividualPSRLStrings($data['employees100'], "£100,000") . ", " . 
             $this->setIndividualPSRLStrings($data['employees150'], "£150,000") . ", " . 
             $this->setIndividualPSRLStrings($data['employees200'], "£200,000") . " and " . 
