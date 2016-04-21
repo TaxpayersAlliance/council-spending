@@ -112,7 +112,7 @@ class APIController extends Controller
 
     }
     /**
-     * Gets data relating to each council from the array of lookup codes
+     * Gets data from councils based on the lookup code
      * 
      * @param  [type] $councilData      [description]
      * @param  [type] $verbosity [description]
@@ -120,23 +120,24 @@ class APIController extends Controller
      */
     private function getDataFromCouncilLookupCode($councilData, $verbosity)
     {
-    	$councilTypes = ['county', 'district'];
-
         $councils = [
             $this->getDataForEachCouncil($councilData, $verbosity, 'district'),
             $this->getDataForEachCouncil($councilData, $verbosity, 'county')
         ];
 
-    	// foreach ($councilTypes as $council => $type) {
-
-     //        $councils['council'] = $this->getDataForEachCouncil($councilData, $verbosity, $type);
-     //    }
-
     	return $councils;
     }
+    /**
+     * get the data for each council
+     * 
+     * @param  [type] $councilData [description]
+     * @param  [type] $verbosity   [description]
+     * @param  [type] $type        [description]
+     * @return [type]              [description]
+     */
     private function getDataForEachCouncil($councilData, $verbosity, $type)
     {
-    $lookup_id = $type . '_lookup_id';
+        $lookup_id = $type . '_lookup_id';
 
         $councils['council'][$type] = $councilData[$lookup_id];
 
@@ -245,19 +246,5 @@ class APIController extends Controller
     {
     	$council = $council[0];
     	return $council;
-    }
-    /**
-     * renames a key in an array
-     * @param  [type] $array  [description]
-     * @param  [type] $newKey [description]
-     * @param  [type] $oldKey [description]
-     * @return [type]         [description]
-     */
-    private function renameKey ($array, $newKey, $oldKey)
-    {
-        $array[$newKey] = $array[$oldKey];
-        unset($array[$oldKey]);
-
-        return $array;
     }
 }

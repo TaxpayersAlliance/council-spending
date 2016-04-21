@@ -31,3 +31,6 @@ Route::get('api/v1/{postcode}/{verbosity}','APIController@getStories');
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+header('Access-Control-Allow-Origin: *');
+header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
