@@ -10,6 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+header('Access-Control-Allow-Origin: *');
+header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,5 +34,3 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
-header('Access-Control-Allow-Origin: *');
-header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
