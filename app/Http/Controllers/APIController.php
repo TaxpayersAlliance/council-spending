@@ -149,6 +149,13 @@ class APIController extends Controller
 
             $council = $this->arrayFormat($council);
 
+            $councilCode = $this->getCouncilCode($council);
+
+            if ($councilCode == null)
+            {
+                return $council = null;
+            }
+
             $council['type'] = $type;
 
             $stories = $this->getStoriesFromCouncil($council, $verbosity);      
@@ -246,5 +253,17 @@ class APIController extends Controller
     {
     	$council = $council[0];
     	return $council;
+    }
+    /**
+     * [getCouncilCode description]
+     * @param  [type] $councils [description]
+     * @param  [type] $type     [description]
+     * @return [type]           [description]
+     */
+    private function getCouncilCode($council)
+    {
+        $councilCode = $council['council_code'];
+
+        return $councilCode;
     }
 }

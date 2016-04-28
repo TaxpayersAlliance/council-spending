@@ -72,6 +72,6 @@ class CouncilArt extends Report
         {
             return "The value of the work is £" . number_format($value);
         } 
-        return "The value of the work is not known";
+        return "The value of the work is not known.";
     }
 }

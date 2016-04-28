@@ -38,8 +38,8 @@ abstract class Report extends Model
      */
     public function scopeRequired ($query, $councilCode)
     {
-
         $query->where('council_code', $councilCode)->get();
+
     }
 	 /**
      * get the details relating to a report
@@ -79,6 +79,7 @@ abstract class Report extends Model
      */
     private function getDataFromCouncilCode($councilCode)
     {
+        
         $storyData = $this->required($councilCode)->get();
 
         return $storyData;
@@ -120,7 +121,7 @@ abstract class Report extends Model
     public function getStoryDataFromCouncil($council)
     {
         $councilCode = $this->getCouncilCode($council);
-
+        
         $data = $this->getDataFromCouncilCode($councilCode);
 
         $data = $this->tidyArray($data[0]);

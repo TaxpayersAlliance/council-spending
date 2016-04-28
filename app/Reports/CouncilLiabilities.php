@@ -48,7 +48,7 @@ class CouncilLiabilities extends Report
 
             return $concatenatedString;
         }
-        return " was not able to provide information about its liabilities";
+        return " was not able to provide information about its liabilities.";
     }
     /**
      * provides the liabilities per person part of the liabilities string
@@ -72,7 +72,7 @@ class CouncilLiabilities extends Report
     {
         if($value != "no data")
         {
-            return " or " . $value . "% of the council's assets";
+            return " or " . $value . "% of the council's assets.";
         }
         return "";
     }

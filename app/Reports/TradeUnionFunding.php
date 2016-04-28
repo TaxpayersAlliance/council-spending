@@ -50,7 +50,7 @@ class TradeUnionFunding extends Report
     {
         if ($value != "no data")
         {
-            return "The equivalent of " . $value . " worked full time on union duties";
+            return "The equivalent of " . $value . " worked full time on union duties. ";
         }
         return "No information on the additional allowance paid to the council leader was available. ";
     }

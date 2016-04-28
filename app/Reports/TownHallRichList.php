@@ -26,7 +26,7 @@ class TownHallRichList extends Report
     {
         $concatenatedString = "In the 2014 Town Hall Rich List, " . $council['council'] . " had " . 
             $this->setIndividualTHRLString($data['employees100'], "£100,000") . " and " . 
-            $this->setIndividualTHRLString($data['employees150'], "£150,000");
+            $this->setIndividualTHRLString($data['employees150'], "£150,000") . ".";
         
         return $concatenatedString;
     }

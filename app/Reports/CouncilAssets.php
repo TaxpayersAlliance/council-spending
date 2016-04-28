@@ -43,7 +43,7 @@ class CouncilAssets extends Report
 
         $this->setIndividualAssetStrings($data['shops'], " shop, and ", " shops, and ") . 
 
-        $this->setIndividualAssetStrings($data['hotels'], " hotel ", " hotels");
+        $this->setIndividualAssetStrings($data['hotels'], " hotel ", " hotels") . ".";
         
         return $concatenatedString;
     }

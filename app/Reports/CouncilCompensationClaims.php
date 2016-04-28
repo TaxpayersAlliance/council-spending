@@ -38,8 +38,8 @@ class CouncilCompensationClaims extends Report
     {
         if ($value != "no data")
         {
-            return " paid out a total of £" . number_format($value) . " in compensation between 2013 and 2015";
+            return " paid out a total of £" . number_format($value) . " in compensation between 2013 and 2015.";
         }
-        return " was not able to provide information on compensation claims paid between 2013 and 2015";
+        return " was not able to provide information on compensation claims paid between 2013 and 2015.";
     }
 }
