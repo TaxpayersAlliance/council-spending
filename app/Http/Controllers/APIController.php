@@ -81,6 +81,8 @@ class APIController extends Controller
 
         $results = $this->getDataFromCouncilLookupCode($councilData, $verbosity);
 
+        $results = $this->removeNullFromArray($results);
+        
         return $results;
     }
     /**
@@ -153,7 +155,7 @@ class APIController extends Controller
 
             if ($councilCode == null)
             {
-                return $council = null;
+                return;
             }
 
             $council['type'] = $type;
@@ -197,20 +199,6 @@ class APIController extends Controller
         return $stories;
     }
     /**
-     * Unset unnecessary data from the array in the verbose output
-     * @param  [type] $stories [description]
-     * @return [type]          [description]
-     */
-    private function formatVerboseOutput($stories)
-    {
-        foreach ($stories as $key => $story) 
-        {
-            $story = array_reverse(array_slice(array_reverse($story->toArray()),0,4));
-            $stories[$key] = $story;
-        }
-        return $stories;
-    }
-    /**
      * sorts all reports by publication date
      * 
      * @param  [type] $stories [description]
@@ -228,6 +216,19 @@ class APIController extends Controller
         return array_reverse($stories);
     }
     /**
+     * gets the council code
+     * 
+     * @param  [type] $councils [description]
+     * @param  [type] $type     [description]
+     * @return [type]           [description]
+     */
+    private function getCouncilCode($council)
+    {
+        $councilCode = $council['council_code'];
+
+        return $councilCode;
+    }
+    /**
      * Apends stories to each council
      * 
      * @param  [type] $stories  [description]
@@ -242,6 +243,9 @@ class APIController extends Controller
 
         return $council;
     }
+
+    //MARK: ARRAY FORMATTING FUNCTIONS
+    
     /**
      * flattens the array heirachy slightly to make it easier to manage
      * 
@@ -255,15 +259,31 @@ class APIController extends Controller
     	return $council;
     }
     /**
-     * [getCouncilCode description]
-     * @param  [type] $councils [description]
-     * @param  [type] $type     [description]
-     * @return [type]           [description]
+     * removes null elements from an array
+     * 
+     * @param  [type] $array [description]
+     * @return [type]        [description]
      */
-    private function getCouncilCode($council)
+    private function removeNullFromArray($array)
     {
-        $councilCode = $council['council_code'];
-
-        return $councilCode;
+        foreach ($array as $i=>$row) {
+            if ($row === null)
+               unset($array[$i]);
+        }
+        return $array;
+    }
+    /**
+     * Unset unnecessary data from the array in the verbose output
+     * @param  [type] $stories [description]
+     * @return [type]          [description]
+     */
+    private function formatVerboseOutput($stories)
+    {
+        foreach ($stories as $key => $story) 
+        {
+            $story = array_reverse(array_slice(array_reverse($story->toArray()),0,4));
+            $stories[$key] = $story;
+        }
+        return $stories;
     }
 }
