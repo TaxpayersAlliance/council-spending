@@ -24,7 +24,7 @@ class TradeUnionOfficeSpace extends Report
      */
     public function setContent($council, $data)
     {
-        $concatenatedString = "The Trade Union Office Space paper found that " . $council['council'] . $this->floorSpaceString($data['floor_space']) . $this->valuationString($data['valuation']);
+        $concatenatedString = "In 2014, " . $council['council'] . $this->floorSpaceString($data['floor_space']) . $this->valuationString($data['valuation']);
         
         return $concatenatedString;
     }
