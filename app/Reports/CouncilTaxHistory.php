@@ -24,14 +24,20 @@ class CouncilTaxHistory extends Report
      */
     public function setContent($council, $data)
     {
-         if ($data['real_terms_increase'] != "no data")
+        if ($data['real_terms_increase'] != "no data" && $data['real_terms_increase'] >= 0)
         { 
-            $concatenatedString = "Council tax at " . $council['council'] . " has risen by " . $data['real_terms_increase'] . " in real terms since 1996-97.";
+            $concatenatedString = "Council tax charged by " . $council['council'] . " has risen by " . $data['real_terms_increase'] . " in real terms since 1996-97.";
+            
+            return $concatenatedString;
+        }
+        if ($data['real_terms_increase'] != "no data" && $data['real_terms_increase'] < 0)
+        { 
+            $concatenatedString = "Council tax charged by " . $council['council'] . " has fallen by " . abs($data['real_terms_increase']) . " in real terms since 1996-97.";
             
             return $concatenatedString;
         }
 
-        $concatenatedString = "There is no available data for historic council tax rises in " . $council['council'] . ".";
+        $concatenatedString = "There is no available data for historic council charged by " . $council['council'] . ".";
         
         return $concatenatedString;
     }

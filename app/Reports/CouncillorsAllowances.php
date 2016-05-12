@@ -18,7 +18,7 @@ class CouncillorsAllowances extends Report
     
     public function setContent($council, $data)
     {
-        $concatenatedString = $council['council'] . " " . 
+        $concatenatedString = "In 2014-15," . $council['council'] . " " . 
             $this->basicAllowanceString($data['basic_allowance']) . 
             $this->SRAString($data['special_responsibility_allowance']) . 
             $this->totalAllowanceString($data['total_allowances_cost']) . 
@@ -35,7 +35,7 @@ class CouncillorsAllowances extends Report
     {
         if ($value != "no data")
         {
-            return "paid a £" . number_format($value) . " basic allowance to all councillors. ";
+            return "paid a £" . number_format($value) . " basic allowance to councillors. ";
         }
         return "was not able to provide information on the basic allowance paid to councilliors. ";
     }

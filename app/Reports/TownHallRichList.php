@@ -14,7 +14,7 @@ class TownHallRichList extends Report
      */
     public function getName()
     {
-    	return "Town Hall Rich List";
+    	return "The Town Hall Rich List";
     }
     /**
      * Concatenates a string for the liabilities content
@@ -24,7 +24,7 @@ class TownHallRichList extends Report
      */
     public function setContent($council, $data)
     {
-        $concatenatedString = "In the 2014 Town Hall Rich List, " . $council['council'] . " had " . 
+        $concatenatedString = "In 2012-13, " . $council['council'] . " had " . 
             $this->setIndividualTHRLString($data['employees100'], "£100,000") . " and " . 
             $this->setIndividualTHRLString($data['employees150'], "£150,000") . ".";
         

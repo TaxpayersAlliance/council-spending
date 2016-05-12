@@ -14,7 +14,7 @@ class PublicSectorRichList extends Report
      */
     public function getName()
     {
-    	return "Public Sector Rich List";
+    	return "The Public Sector Rich List";
     }
     /**
      * Concatenates a string for the liabilities content
@@ -24,11 +24,11 @@ class PublicSectorRichList extends Report
      */
     public function setContent($council, $data)
     {
-        $concatenatedString = "In the 2015 Public Sector Rich List, ". $council['council'] . " had " . 
+        $concatenatedString = "In 2013-14, ". $council['council'] . " had " . 
             $this->setIndividualPSRLStrings($data['employees100'], "£100,000") . ", " . 
             $this->setIndividualPSRLStrings($data['employees150'], "£150,000") . ", " . 
             $this->setIndividualPSRLStrings($data['employees200'], "£200,000") . " and " . 
-            $this->setIndividualPSRLStrings($data['employees300'], "£300,000") . ". ";
+            $this->setIndividualPSRLStrings($data['employees300'], "£300,000") . ".";
         
         return $concatenatedString;
     }

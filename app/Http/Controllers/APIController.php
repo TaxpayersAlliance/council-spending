@@ -75,9 +75,19 @@ class APIController extends Controller
      */
     public function getStories($postcode, $verbosity)
     {
-        $this->validatePostcode($postcode);
+        $postcode = strtolower($postcode);
+
+        if ($this->validatePostcode($postcode) == true)
+        {
+            dd("ERROR: this does not appear to be a valid postcode");
+        }
 
         $councilData = $this->getCouncilCodesFromPostcode($postcode);
+
+        if ($councilData == null)
+        {
+            dd("ERROR: no data found for this postcode");
+        }
 
         $results = $this->getDataFromCouncilLookupCode($councilData, $verbosity);
 
@@ -95,9 +105,9 @@ class APIController extends Controller
     {
         $length = strlen($postcode);
 
-        if(($length < 5) || ($length > 10))
+        if($length < 5 || $length > 10)
         {
-            dd("error, not a valid postcode");
+            return true;
         }
     }
     /**
@@ -143,7 +153,7 @@ class APIController extends Controller
 
         $councils['council'][$type] = $councilData[$lookup_id];
 
-        if ($councils['council'] != null)
+        if ($councils['council'][$type] != null)
         {
             $councils['council'] = Council::where("council_code",$councils['council'])->get();
 
@@ -166,6 +176,7 @@ class APIController extends Controller
 
             return $council;
         }
+        return;
     }
     /**
      * Gets stories for each council

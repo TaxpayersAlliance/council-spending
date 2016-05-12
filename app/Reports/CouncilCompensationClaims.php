@@ -24,7 +24,6 @@ class CouncilCompensationClaims extends Report
      */
     public function setContent($council, $data)
     {
-
         $concatenatedString = $council['council'] . $this->totalCost($data['total']);
         
         return $concatenatedString;

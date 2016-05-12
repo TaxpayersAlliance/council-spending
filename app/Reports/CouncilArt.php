@@ -31,7 +31,7 @@ class CouncilArt extends Report
         
         $strValue = $this->totalValueString($data['value']);
 
-        $concatenatedString = $council['council'] . $strTotalNumber . $strOnDisplay . $strValue;
+        $concatenatedString = "In 2015, " . $council['council'] . $strTotalNumber . $strOnDisplay . $strValue;
 
         return $concatenatedString;
     }

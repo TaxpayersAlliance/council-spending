@@ -25,7 +25,7 @@ class CouncilLiabilities extends Report
      */
     public function setContent($council, $data)
     {
-        return $concatenatedString = $council["council"] . $this->liabilitiesString($data);
+        return $concatenatedString = "In 2012-13 " . $council["council"] . $this->liabilitiesString($data);
 
 
     }
