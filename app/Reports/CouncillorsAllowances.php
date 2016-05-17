@@ -18,7 +18,7 @@ class CouncillorsAllowances extends Report
     
     public function setContent($council, $data)
     {
-        $concatenatedString = "In 2014-15," . $council['council'] . " " . 
+        $concatenatedString = "In 2014-15, " . $council['council'] . " " . 
             $this->basicAllowanceString($data['basic_allowance']) . 
             $this->SRAString($data['special_responsibility_allowance']) . 
             $this->totalAllowanceString($data['total_allowances_cost']) . 

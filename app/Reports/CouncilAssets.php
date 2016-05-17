@@ -23,7 +23,7 @@ class CouncilAssets extends Report
      */
     public function setContent($council, $data)
     {
-        $concatenatedString = "As of April 1st 2014" . $council['council'] . " owned: " . 
+        $concatenatedString = "As of April 1st 2014 " . $council['council'] . " owned: " . 
 
         $this->setIndividualAssetStrings($data['golf_courses'], " golf course, ", " golf courses, ") . 
 
