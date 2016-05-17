@@ -201,7 +201,9 @@ class APIController extends Controller
             $this->councilCompensationClaims->getStoryDataFromCouncil($council)
 
         ];
-        $this->sortByPublicationDate($stories);
+        $name = 'publication_date';
+
+        usort($stories, array($this, "cmp"));
 
         if ($verbosity == "true")
         {
@@ -210,21 +212,18 @@ class APIController extends Controller
         return $stories;
     }
     /**
-     * sorts all reports by publication date
-     * 
-     * @param  [type] $stories [description]
-     * @return [type]          [description]
+     * compares the publication dates (competion for usort)
+     * @param  [type] $a [description]
+     * @param  [type] $b [description]
+     * @return [type]    [description]
      */
-    private function sortByPublicationDate($stories)
+    private function cmp ($a, $b)
     {
-        $name = 'publication_date';
-
-        usort($stories, function ($a, $b) use(&$name)
-        {
-            return $a[$name]->timestamp -  $b[$name]->timestamp;
-        });
-
-        return array_reverse($stories);
+        if ($a['publication_date']->timestamp == $b['publication_date']->timestamp)
+            {
+            return 0;
+            }
+        return ($a['publication_date']->timestamp > $b['publication_date']->timestamp) ? -1 : 1 ;
     }
     /**
      * gets the council code
