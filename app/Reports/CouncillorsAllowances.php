@@ -13,7 +13,7 @@ class CouncillorsAllowances extends Report
      */
     public function getName()
     {
-    	return "Councillors Allowances'";
+    	return "Councillors' Allowances";
     }
     
     public function setContent($council, $data)
