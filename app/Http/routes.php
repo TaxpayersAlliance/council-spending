@@ -14,7 +14,7 @@ header('Access-Control-Allow-Origin: *');
 header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
 
 Route::get('/', function () {
-    return view('home');
+    return view('landingPage');
 });
 Route::get('privacy', function () {
 	return view('privacyPolicy');
