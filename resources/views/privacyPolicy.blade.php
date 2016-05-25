@@ -10,14 +10,15 @@
 	<h2>Website</h2>
 	<h3>What information do we collect?</h3>
 	<p>We do not collect personal data</p>
+	<p>The website collects some, limited logging data such as your IP address. This will only ever be used for the purposes of system diagnostics and no attempt to discover individual users' usage patterns will be made.</p>
 	<h3>Cookies</h3>
 	<p>This website does not use cookies</p>
 	<h3>Security</h3>
 	<p>If you discover a security vulnerability please email <a href="mailto:info@taxpayersalliance.com" target="_blank">info@taxpayersalliance.com</a>. All security vunerabilities will be promptly addressed.</p>
-	<p>Our sites will contain links to other websites not under our control. As such, we cannot be responsible for the protection and privacy of any information you may provide while visiting other sites, nor are said sites governed by this privacy policy. If you have any concerns please refer to the privacy policy of the site in question.
-	Controlling your data</p>
+	<p>Our sites will contain links to other websites not under our control. As such, we cannot be responsible for the protection and privacy of any information you may provide while visiting other sites, nor are said sites governed by this privacy policy. If you have any concerns please refer to the privacy policy of the site in question.</p>
 	<h2>Apps</h2>
-	<p>The TaxPayers' Alliance has developed the <em>Council Data</em> app using the APIs located on this website. This app does not colect any personal data.</p>
+	<p>The TaxPayers' Alliance has developed the <em>YourTPA</em> app using the APIs located on this website. This app does not colect any personal data.</p>
 	<p>The TaxPayers' Alliance is not responsible for any third party applications that may make use of the APIs located here</p> 
+	<p>If you have any questions or concerns, please email <a href="mailto:info@taxpayersalliance.com" target="_blank">info@taxpayersalliance.com</a>.</p>
 </div>
 @stop
