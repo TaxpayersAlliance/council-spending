@@ -14,7 +14,13 @@ header('Access-Control-Allow-Origin: *');
 header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+Route::get('privacy', function () {
+	return view('privacyPolicy');
+});
+Route::get('council_spending', function () {
+	return view('index');
 });
 Route::get('api/v1/{postcode}/{verbosity}','APIController@getStories');
 
