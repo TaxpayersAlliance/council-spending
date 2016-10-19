@@ -53,7 +53,7 @@ class APIController extends Controller
     {
         $this->councilArt = $councilArt;
         $this->councilAssets = $councilAssets;
-        $this->townHallRichList = $townHallRichList;
+        // $this->townHallRichList = $townHallRichList;
         $this->tradeUnionFunding = $tradeUnionFunding;
         $this->councilTaxHistory = $councilTaxHistory;
         $this->councilLiabilities = $councilLiabilities;
@@ -191,7 +191,7 @@ class APIController extends Controller
         $stories = [
             $this->councilArt->getStoryDataFromCouncil($council), 
             $this->councilAssets->getStoryDataFromCouncil($council), 
-            $this->townHallRichList->getStoryDataFromCouncil($council),
+            // $this->townHallRichList->getStoryDataFromCouncil($council),
             $this->councilTaxHistory->getStoryDataFromCouncil($council),  
             $this->tradeUnionFunding->getStoryDataFromCouncil($council),
             $this->councilLiabilities->getStoryDataFromCouncil($council),
