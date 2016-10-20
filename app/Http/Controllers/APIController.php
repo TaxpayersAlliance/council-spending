@@ -12,7 +12,7 @@ use App\Postcodes;
 use App\ReportDetails;
 use App\Reports\CouncilArt;
 use App\Reports\CouncilAssets;
-use App\Reports\TownHallRichList;
+// use App\Reports\TownHallRichList;
 use App\Reports\CouncilTaxHistory;
 use App\Reports\TradeUnionFunding;
 use App\Reports\CouncilLiabilities;
@@ -26,7 +26,7 @@ class APIController extends Controller
 {
     protected $councilArt;
     protected $councilAssets;
-    protected $townHallRichList;
+    // protected $townHallRichList;
     protected $tradeUnionFunding;
     protected $councilTaxHistory;
     protected $councilLiabilities;
@@ -49,7 +49,7 @@ class APIController extends Controller
      * @param TradeUnionFunding         $tradeUnionFunding         [description]
      * @param TradeUnionOfficeSpace     $tradeUnionOfficeSpace     [description]
      */
-    public function __construct(CouncilArt $councilArt, CouncilAssets $councilAssets, CouncilCompensationClaims $councilCompensationClaims, CouncilLiabilities $councilLiabilities, CouncillorsAllowances $councillorsAllowances, CouncilTaxHistory $councilTaxHistory, PublicSectorRichList $publicSectorRichList, TownHallRichList $townHallRichList, TradeUnionFunding $tradeUnionFunding, TradeUnionOfficeSpace $tradeUnionOfficeSpace)
+    public function __construct(CouncilArt $councilArt, CouncilAssets $councilAssets, CouncilCompensationClaims $councilCompensationClaims, CouncilLiabilities $councilLiabilities, CouncillorsAllowances $councillorsAllowances, CouncilTaxHistory $councilTaxHistory, PublicSectorRichList $publicSectorRichList, TradeUnionFunding $tradeUnionFunding, TradeUnionOfficeSpace $tradeUnionOfficeSpace) // TownHallRichList $townHallRichList,
     {
         $this->councilArt = $councilArt;
         $this->councilAssets = $councilAssets;
