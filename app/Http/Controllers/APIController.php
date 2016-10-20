@@ -203,7 +203,7 @@ class APIController extends Controller
         ];
         $name = 'publication_date';
 
-        // usort($stories, array($this, "cmp"));
+        usort($stories, array($this, "cmp"));
 
         if ($verbosity == "true")
         {
